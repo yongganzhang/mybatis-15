@@ -1,0 +1,47 @@
+接口映射器配置
+	
+	第一步：
+	在框架配置文件中mybatis-context.xml
+	
+	将mapper映射 修改为包扫描
+		<mappers>
+			<package name="com.shsxt.dao"/>
+		</mappers>
+		
+	
+	第二步：
+		在项目中新建一个dao包
+		
+		定义的接口 	和查询的方法
+		
+		public interface UserDao {
+	
+			public User queryUserByUid (int  id) ;
+			
+			public User queryUserByName (String name);
+		
+		}
+		
+		在同级目录下创建SQL映射文件UserDao.xml【 取名注意要和接口名称保持一致】
+		
+		其次：
+			1.SQL映射文件中的 命名空间
+			  <mapper namespace="com.shsxt.dao.UserDao">
+			  namespace 相与相对应的接口的完全限定名保持一致
+			 
+			2. 映射文件文件中 mapperStatement 中id相与对应接口中方法名称一致
+			
+			3. 传入参数问题 
+				mapperStatement 中的 parameterType 相与 接口中参数类型保持一致
+									resultType   相与 接口中方法返回值类型保持一致 
+									#{参数名}      相与 接口中方法的形参名称保持一致 
+									
+			  
+	
+mybatis-context.xml
+	需要学会（重点）
+	1、别名设置
+	2、插件引入
+	3、接口映射的配置
+	
+				
