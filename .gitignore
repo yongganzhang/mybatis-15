@@ -17,3 +17,15 @@ mybatis-typeHandlers-03/.settings/
 mybatis-typeHandlers-03/.project
 mybatis-typeHandlers-03/.classpath
 mybatis-typeHandlers-03/target/
+
+
+mybatis-plugins-01/.settings/
+mybatis-plugins-01/.project
+mybatis-plugins-01/.classpath
+mybatis-plugins-01/target/
+
+
+mybatis-environments-01/.settings/
+mybatis-environments-01/.project
+mybatis-environments-01/.classpath
+mybatis-environments-01/target/

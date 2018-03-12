@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<properties resource="db.properties" />
+	
+	<typeAliases>
+		<package name="com.shsxt.pojo"/>
+	</typeAliases>
+	
+	<!-- 添加数据库连接相关配置信息 -->
+	<environments default="dev">
+	
+		<environment id="dev">
+			<!-- 加入事务控制 -->
+			<transactionManager type="jdbc" />
+			<!-- 配置数据库连接信息 -->
+			<dataSource type="pooled">
+				<property name="driver" value="${jdbc.driver}" />
+				<property name="url" value="${jdbc.url}" />
+				<property name="username" value="${jdbc.name}" />
+				<property name="password" value="${jdbc.pwd}" />
+			</dataSource>
+		</environment>
+		
+		<environment id="test">
+			<!-- 加入事务控制 -->
+			<transactionManager type="jdbc" />
+			<!-- 配置数据库连接信息 -->
+			<dataSource type="pooled">
+				<property name="driver" value="${jdbc.driver}" />
+				<property name="url" value="${jdbc.url}" />
+				<property name="username" value="${jdbc.name}" />
+				<property name="password" value="${jdbc.pwd}" />
+			</dataSource>
+		</environment>
+		
+	</environments>
+
+	<!-- SQL映射文件地址 -->
+	<mappers>
+		<mapper resource="com/shsxt/mappper/UserMapper.xml" /> <!-- 文件的路径 -->
+	</mappers>
+
+</configuration>
