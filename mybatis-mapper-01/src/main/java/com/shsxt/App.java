@@ -2,6 +2,7 @@ package com.shsxt;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -22,16 +23,22 @@ public class App {
 		SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(is);
 
 		// 打开 session会话
-		SqlSession session = factory.openSession();
-		
+		SqlSession session = factory.openSession(true);
 
 		// 动态代理生成接口的实现子类
 		UserDao userDao = session.getMapper(UserDao.class);
 
-		User user = userDao.queryUserByUid(1);
+		// List<User> list = userDao.queryUserLikeUserName("y");
+		// for (User user : list) {
+		// System.out.println(user);
+		// }
 
-		System.out.println(user);
+		User user = new User();
+		user.setUserName("zhangshaohan");
+		user.setUserBalance(123.33);// 阿刁
+
+		int res = userDao.insertUserHasNoKey(user);
+		System.out.println(res);
 
 	}
-
 }

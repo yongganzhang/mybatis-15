@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shsxt.dao.UserDao"><!-- 全局唯一 -->
+
+
+	<sql id="Base_sql">
+		id, user_name 'userName' , user_balance 'userBalance'
+	</sql>
+
+	<!-- 查询操作 -->
+	<select id="queryUserByUid" resultType="user">
+		select
+		<include refid="Base_sql" />
+		from
+		yg_customer where id = #{uid}
+	</select>
+
+	<select id="queryUserLikeUserName" parameterType="string"
+		resultType="user">
+		select
+		<include refid="Base_sql" />
+		from
+		yg_customer where user_name like CONCAT ('%','${userName}','%')
+	</select>
+
+
+	<!-- 插入数据 -->
+	<insert id="insertUserHasNoKey" parameterType="user">
+		INSERT INTO `yg_customer` (`user_name`, `user_balance`)
+			VALUES
+				(#{userName}, #{userBalance});
+	</insert>
+
+</mapper>
