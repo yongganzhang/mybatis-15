@@ -16,4 +16,15 @@ public interface UserDao {
 	
 	public int insertUserHasNoKey (User user);
 	
+	
+	public int insertUserHasKey (User user);
+	
+	public int bathInsertUser (List<User> list);
+	
+	public  int updateUserBalanceById (User user); 
+	
+	
+	// 批量修改
+	public  int bathUpdateUserBalanceById (List<Integer> ids); 
+	
 }

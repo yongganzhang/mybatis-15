@@ -30,7 +30,42 @@
 	<insert id="insertUserHasNoKey" parameterType="user">
 		INSERT INTO `yg_customer` (`user_name`, `user_balance`)
 			VALUES
-				(#{userName}, #{userBalance});
+				(#{userName}, #{userBalance})
 	</insert>
+
+	<!-- 插入数据 返回主键-->
+	<insert id="insertUserHasKey" parameterType="user" 
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO `yg_customer` (`user_name`, `user_balance`)
+			VALUES
+				(#{userName}, #{userBalance})
+	</insert>
+	
+	<!-- 批量插入 -->
+	<!-- INSERT INTO `yg_customer` (`user_name`, `user_balance`) VALUES (?, ?) , (?, ?) , (?, ?) , (?, ?) , (?, ?)  -->
+
+	<insert id="bathInsertUser" parameterType="list">
+		INSERT INTO `yg_customer` (`user_name`, `user_balance`)
+			VALUES
+			<foreach collection="list" item="temp" separator=",">
+				(#{temp.userName}, #{temp.userBalance})
+			</foreach>
+			
+	</insert>
+	
+	<update id="updateUserBalanceById" parameterType="user">
+		UPDATE `yg_customer` SET  `user_balance`= #{userBalance} WHERE (`id`= #{id})
+	</update>
+	
+	<!-- 批量修改 -->
+	<update id="bathUpdateUserBalanceById" parameterType="list">
+		UPDATE `yg_customer` SET  `user_balance`=  240  WHERE
+		 id in 
+		<foreach collection="list" item="item" separator="," open="(" close=")">
+			   #{item}
+		</foreach> 
+		
+	</update>
+	
 
 </mapper>
