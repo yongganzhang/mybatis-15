@@ -11,3 +11,9 @@ mybatis-demo-02/.settings/
 mybatis-demo-02/.project
 mybatis-demo-02/.classpath
 mybatis-demo-02/target/
+
+
+mybatis-typeHandlers-03/.settings/
+mybatis-typeHandlers-03/.project
+mybatis-typeHandlers-03/.classpath
+mybatis-typeHandlers-03/target/
