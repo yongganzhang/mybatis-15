@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.shsxt.mappper.UserMapper"><!-- 全局唯一 -->
+  
+  	<!-- id 本命名空间唯一 -->
+    <select id="queryUserById" parameterType="int"  resultType="com.shsxt.pojo.User">
+      select  id, user_name 'userName' , user_balance 'userBalance' from yg_customer where id =  #{id}
+    </select>
+  
+  </mapper>

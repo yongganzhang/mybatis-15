@@ -1,0 +1,127 @@
+Bean:
+	会根据局Bean使用场景不同，将其区分
+	
+	Java Bean : 数据模型（数据存储） （model）
+	POJO ：用于做数据库记录与java实体对象 对应的Bean
+	DTO :用于不同系统之间的网络间传输用 的bean
+	VO: 用于视图展示用的Bean
+	
+
+
+搭建mybatis框架
+	第一步、创建maven项目
+	
+	第二、引入相关jar
+		必须jar
+			<dependency>
+			    <groupId>mysql</groupId>
+			    <artifactId>mysql-connector-java</artifactId>
+			    <version>5.1.39</version>
+			</dependency>
+		
+			<!-- mybatis jar 包依赖 -->
+			<dependency>
+			    <groupId>org.mybatis</groupId>
+			    <artifactId>mybatis</artifactId>
+			    <version>3.4.1</version>
+			</dependency>
+			
+		非必须	
+			<!-- junit 测试jar -->
+			<dependency>
+			    <groupId>junit</groupId>
+			    <artifactId>junit</artifactId>
+			    <version>4.12</version>
+			    <scope>test</scope>
+			</dependency>
+			
+			<!-- log4j日志打印 -->
+			<dependency>
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			    <version>1.2.16</version>
+			</dependency>
+			
+	第三步、
+		添加日志的配置文件 在src/main/resources 资源包下添加log4j日志输出文件（log4j.properties）
+				# Global logging configuration
+				log4j.rootLogger=DEBUG, stdout
+				# Console output...
+				log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+				log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+				log4j.appender.stdout.layout.ConversionPattern=%5p [%t] - %m%n
+						
+
+	第四步、
+		框架的配置文件(mybatis-context.xml) 【注意：mybatis 配置文件的头声明】
+		<?xml version="1.0" encoding="UTF-8" ?>
+		<!DOCTYPE configuration
+		  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+		<configuration>
+			<!-- 添加数据库连接相关配置信息 -->
+			<configuration>
+				<environments default="development">
+					<environment id="development">
+						<!-- 加入事务控制 -->
+						<transactionManager type="jdbc" />
+						<!-- 配置数据库连接信息 -->
+						<dataSource type="pooled">
+							<property name="driver" value="com.mysql.jdbc.Driver" />
+							<property name="url" value="jdbc:mysql://127.0.0.1:3306/mybatis" />
+							<property name="username" value="root" />
+							<property name="password" value="root" />
+						</dataSource>
+					</environment>
+				</environments>
+		
+		
+			</configuration>
+		
+	
+	第五步：
+		添加SQL映射文件
+		
+		 <?xml version="1.0" encoding="UTF-8" ?>
+			<!DOCTYPE mapper
+			  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+			  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+			  <mapper namespace="com.shsxt.mappper.UserMapper"><!-- 全局唯一 -->
+			  
+			  	<!-- id 本命名空间唯一 -->
+			    <select id="queryUserById" parameterType="int"  resultType="com.shsxt.pojo.User">
+			      select  id, user_name 'userName' , user_balance 'userBalance' from yg_customer where id =  #{id}
+			    </select>
+			  
+			  </mapper>
+		 
+	第六步： 测试框架
+	
+		 InputStream is = Resources.getResourceAsStream("mybatis-context.xml");
+	
+		// 创建一个SqlSession工厂
+		SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(is);
+	
+		// 打开 session会话
+		SqlSession session = factory.openSession();
+		
+		Object obj = session.selectOne("com.shsxt.mappper.UserMapper.queryUserById", 1);
+		
+		System.out.println(obj);
+		
+	第七步：
+		在mybatis配置文件中添加  SQL mapper文件的路径
+		<!-- SQL映射文件地址 -->
+		
+		<mappers>
+			<mapper resource="com/shsxt/mappper/UserMapper.xml"/> <!-- 文件的路径 -->
+		</mappers>
+
+			
+						
+			
+			
+						
+			
+			
+		
