@@ -7,6 +7,7 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>mybatis-demo-01</module>
+		<module>mybatis-demo-02</module>
 	</modules>
 
 
