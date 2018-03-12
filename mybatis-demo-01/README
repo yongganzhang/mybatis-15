@@ -60,7 +60,6 @@ Bean:
 		  "http://mybatis.org/dtd/mybatis-3-config.dtd">
 		<configuration>
 			<!-- 添加数据库连接相关配置信息 -->
-			<configuration>
 				<environments default="development">
 					<environment id="development">
 						<!-- 加入事务控制 -->
@@ -86,7 +85,7 @@ Bean:
 			<!DOCTYPE mapper
 			  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-			  <mapper namespace="com.shsxt.mappper.UserMapper"><!-- 全局唯一 -->
+			  <mapper namespace="com.shsxt.mapper.UserMapper"><!-- 全局唯一 -->
 			  
 			  	<!-- id 本命名空间唯一 -->
 			    <select id="queryUserById" parameterType="int"  resultType="com.shsxt.pojo.User">
@@ -105,7 +104,7 @@ Bean:
 		// 打开 session会话
 		SqlSession session = factory.openSession();
 		
-		Object obj = session.selectOne("com.shsxt.mappper.UserMapper.queryUserById", 1);
+		Object obj = session.selectOne("com.shsxt.mapper.UserMapper.queryUserById", 1);
 		
 		System.out.println(obj);
 		
@@ -114,7 +113,7 @@ Bean:
 		<!-- SQL映射文件地址 -->
 		
 		<mappers>
-			<mapper resource="com/shsxt/mappper/UserMapper.xml"/> <!-- 文件的路径 -->
+			<mapper resource="com/shsxt/mapper/UserMapper.xml"/> <!-- 文件的路径 -->
 		</mappers>
 
 			
