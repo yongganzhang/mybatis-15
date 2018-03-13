@@ -23,7 +23,6 @@
 		select goods_img from tb_goods_imgage  where goods_skuid  =  #{id}
 	</select>
 	
-	
 	<!--  查询商品图片包含一对关系多 -->
 	
 	
@@ -55,6 +54,4 @@
 	
 	
 	
-	
-
 </mapper>

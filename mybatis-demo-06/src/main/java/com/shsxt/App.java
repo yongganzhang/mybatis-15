@@ -2,8 +2,6 @@ package com.shsxt;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -11,9 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.shsxt.dao.GoodsDao;
-import com.shsxt.dao.UserDao;
 import com.shsxt.pojo.Goods;
-import com.shsxt.pojo.User;
 
 public class App {
 
@@ -47,6 +43,9 @@ public class App {
 		
 		Goods goods = goodsDao.queryGoodsAndImagesByGoodsId(7);
 		System.out.println(goods);
+		GoodsDao mapper = session.getMapper(GoodsDao.class);
+		Goods queryGoodsById = mapper.queryGoodsById(2);
+		System.out.println(queryGoodsById);
 	}
 
 }

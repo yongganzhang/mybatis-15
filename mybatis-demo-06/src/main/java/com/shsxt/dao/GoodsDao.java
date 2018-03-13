@@ -8,12 +8,11 @@ import com.shsxt.pojo.Goods;
 import com.shsxt.pojo.GoodsImages;
 
 public interface GoodsDao {
-	
-	
-	public Goods queryGoodsById (int id) ;
-	
-	public  Goods queryGoodsAndImagesByGoodsId (int  id) ;
-	
-	public List<GoodsImages> queryGoodsImagesBeanByGoodsId (@Param("id") int goodsId);
+
+	public Goods queryGoodsById(int id);
+
+	public Goods queryGoodsAndImagesByGoodsId(int id);
+
+	public List<GoodsImages> queryGoodsImagesBeanByGoodsId(@Param("id") int goodsId);
 
 }

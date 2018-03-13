@@ -61,5 +61,4 @@ public class Goods {
 		return "Goods [id=" + id + ", GoodsName=" + GoodsName + ", goodsPrice=" + goodsPrice + ", goodsImages="
 				+ goodsImages + ", imagesList=" + imagesList + "]";
 	}
-
 }
