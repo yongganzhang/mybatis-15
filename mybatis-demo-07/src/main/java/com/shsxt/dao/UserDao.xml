@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shsxt.dao.UserDao"><!-- 全局唯一 -->
+	<!-- 定义一个映射关系 -->
+	<resultMap type="com.shsxt.pojo.User" id="baseUser">
+		<id column="id" property="id" />
+		<result column="user_name" property="userName" />
+		<result column="user_balance" property="userBalance" />
+	</resultMap>
+
+
+	<select id="queryUserById" parameterType="int" resultMap="baseUser">
+		select id , user_name , user_balance from yg_customer where id = #{ids}
+	</select>
+
+
+
+
+</mapper>

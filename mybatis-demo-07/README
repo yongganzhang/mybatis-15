@@ -1,0 +1,32 @@
+Mybatis 缓存
+	一级缓存
+		作用域： sqlSession   默认开启
+		
+	二级缓存
+		作用域： 	mapper    
+		开启步骤：
+			1、第一步
+			在mybatis-context.xml 
+			设置全局缓存开启
+				<!-- 默认 开启二级缓存 -->
+				<settings>
+					<setting name="cacheEnabled" value="true"/>
+				</settings>
+				
+			2.第二步
+				在映射文件中
+				添加 二级缓存开启
+				<cache eviction="FIFO" flushInterval="60000" 
+				size="512" readOnly="true" />
+				
+			3.注意点：
+				若想关闭
+				userCache = 'false'
+				
+				默认缓存的刷新： insert  update delete 时候刷新缓存
+				
+		一/二级缓存底层都是HashMap实现		
+			
+				
+				
+				
