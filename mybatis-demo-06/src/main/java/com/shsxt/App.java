@@ -47,7 +47,5 @@ public class App {
 		Goods queryGoodsById = mapper.queryGoodsById(2);
 		System.out.println(queryGoodsById);
 		
-		
 	}
-// 测试代码冲突
 }
