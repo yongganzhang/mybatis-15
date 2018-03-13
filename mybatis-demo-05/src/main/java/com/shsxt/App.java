@@ -31,7 +31,7 @@ public class App {
 //		
 //		User user = userDao.queryUserByid(1);
 		
-		int delUserById = userDao.delUserById(40);
+		int delUserById = userDao.delUserByIdV2(39);
 		
 		
 		System.out.println(delUserById);

@@ -2,6 +2,7 @@ package com.shsxt.dao;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.DeleteProvider;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.shsxt.pojo.User;
@@ -15,6 +16,6 @@ public interface UserDao {
 	public int delUserById  (int id) ;
 	
 	@DeleteProvider (method = "deleteUser" ,type = UserProvider.class)
-	public int delUserByIdV2  (int id) ;
+	public int delUserByIdV2  (@Param("id") int id) ;
 	
 }
