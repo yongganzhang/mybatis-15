@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shsxt.dao.GoodsDao"><!-- 全局唯一 -->
+	<!-- 定义一个映射关系 -->
+	<resultMap type="goods" id="baseUser">
+		<id  column="id" property="id" />
+		<result column="name"  property="GoodsName" />
+		<result column="promotePrice"  property="goodsPrice" />
+		<!-- 图片问题 -->
+		<association property="goodsImages" column="id" select="queryGoodsImagesByGoodsId"/>
+	
+	</resultMap>
+	
+	
+	<select id="queryGoodsById" parameterType="int" resultMap="baseUser">
+		select id , name , promotePrice from tb_goods  where id  =  #{id}
+	</select>
+	
+	<!-- 查询商品图片 -->
+	<select id="queryGoodsImagesByGoodsId" parameterType="int" resultType="string">
+		select goods_img from tb_goods_imgage  where goods_skuid  =  #{id}
+	</select>
+	
+	
+	<!--  查询商品图片包含一对关系多 -->
+	
+	
+	<!-- 定义一个映射关系 -->
+	<resultMap type="goods" id="baseGoods2">
+		<id  column="id" property="id" />
+		<result column="name"  property="GoodsName" />
+		<result column="promotePrice"  property="goodsPrice" />
+		<collection column="id" property="imagesList" select="queryGoodsImagesBeanByGoodsId"/>
+	</resultMap>
+	
+	<!-- 图片映射   -->
+	<resultMap type="GoodsImages" id="baseGoodsImages">
+		<id  column="id" property="id" />
+		<result column="goods_skuid"  property="goodsId" />
+		<result column="goods_img"  property="goodsImage" />
+	</resultMap>
+	
+	
+	<select id="queryGoodsAndImagesByGoodsId" parameterType="int" resultMap="baseGoods2">
+		select id , name , promotePrice from tb_goods  where id  =  #{id}
+	</select>
+	
+	
+	<!-- 查询商品图片 -->
+	<select id="queryGoodsImagesBeanByGoodsId" parameterType="int" resultMap="baseGoodsImages">
+		select id , goods_skuid ''  ,goods_img from tb_goods_imgage  where goods_skuid  =  #{id}
+	</select>
+	
+	
+	
+	
+
+</mapper>
