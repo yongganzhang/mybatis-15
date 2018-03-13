@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shsxt.dao.UserDao"><!-- 全局唯一 -->
+
+
+	<sql id="Base_sql">
+		id,
+		user_name 'userName',
+		user_balance 'userBalance'
+	</sql>
+
+	<delete id="delUserById" parameterType="int">
+		DELETE from yg_customer where id = #{id}
+	</delete>
+
+	<delete id="delUserByUserName" parameterType="map">
+		DELETE from test where name = '${userName}'
+	</delete>
+
+	<delete id="BathDelUserById">
+		DELETE from yg_customer where id in
+		<!-- collection ：(集合类型 ) -->
+		<foreach collection="array" item="item" open="(" separator=","
+			close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+
+	<select id="queryUserlikeUserName" parameterType="string"
+		resultType="user">
+		SELECT
+			<include refid="Base_sql"/>
+		FROM
+		yg_customer
+		WHERE 1 = 1 
+		<if test="userName != null  and  userName != ''">
+		 	and user_name LIKE CONCAT('%', #{userName}, '%')
+		</if>
+	</select>
+	
+	
+	<select id="queryUserByUserNameOrUserBal" parameterType="user"
+		resultType="user">
+		SELECT
+		<include refid="Base_sql"/>
+		FROM
+		yg_customer
+		WHERE 1 = 1 
+		<choose>
+			<when test="userName != null  and  userName != ''">
+				and user_name LIKE CONCAT('%', #{userName}, '%')
+			</when>
+			<when test = "userBalance != null and  userBalance != '' ">
+			 	and	user_balance  <![CDATA[  <= ]]>  #{userBalance}  <!-- 原样输出 -->   
+			</when>
+			<otherwise>
+			  and  1 = 1 
+			</otherwise>
+		</choose>
+	</select>
+
+</mapper>

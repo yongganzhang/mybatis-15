@@ -13,6 +13,7 @@
 		<module>mybatis-plugins-01</module>
 		<module>mybatis-demo-03</module>
 		<module>mybatis-mapper-01</module>
+		<module>mybatis-demo-04</module>
 	</modules>
 
 
