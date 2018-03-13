@@ -30,4 +30,14 @@ public interface UserDao {
 	
 	public List<User> queryUserByUserNameOrUserBal (User user);
 	
+	public List<User> queryUserById (@Param ("id") Integer id) ;
+	
+	public List<User> queryUserByUser (@Param ("name") String name) ;
+	
+	
+	public int updateUser (User user);
+	
+	
+	
+	
 }

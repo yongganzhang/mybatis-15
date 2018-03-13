@@ -12,11 +12,13 @@
 	</sql>
 
 	<delete id="delUserById" parameterType="int">
-		DELETE from yg_customer where id = #{id}
+		DELETE from yg_customer
+		where id = #{id}
 	</delete>
 
 	<delete id="delUserByUserName" parameterType="map">
-		DELETE from test where name = '${userName}'
+		DELETE from test
+		where name = '${userName}'
 	</delete>
 
 	<delete id="BathDelUserById">
@@ -32,34 +34,94 @@
 	<select id="queryUserlikeUserName" parameterType="string"
 		resultType="user">
 		SELECT
-			<include refid="Base_sql"/>
+		<include refid="Base_sql" />
 		FROM
 		yg_customer
-		WHERE 1 = 1 
+		WHERE 1 = 1
 		<if test="userName != null  and  userName != ''">
-		 	and user_name LIKE CONCAT('%', #{userName}, '%')
+			and user_name LIKE CONCAT('%', #{userName}, '%')
 		</if>
 	</select>
-	
-	
+
+
 	<select id="queryUserByUserNameOrUserBal" parameterType="user"
 		resultType="user">
 		SELECT
-		<include refid="Base_sql"/>
+		<include refid="Base_sql" />
 		FROM
 		yg_customer
-		WHERE 1 = 1 
+		WHERE 1 = 1
 		<choose>
 			<when test="userName != null  and  userName != ''">
 				and user_name LIKE CONCAT('%', #{userName}, '%')
 			</when>
-			<when test = "userBalance != null and  userBalance != '' ">
-			 	and	user_balance  <![CDATA[  <= ]]>  #{userBalance}  <!-- 原样输出 -->   
+			<when test="userBalance != null and  userBalance != '' ">
+				and user_balance  <![CDATA[  <= ]]>
+				#{userBalance}  <!-- 原样输出 -->
 			</when>
 			<otherwise>
-			  and  1 = 1 
+				and 1 = 1
 			</otherwise>
 		</choose>
 	</select>
+
+
+
+	<select id="queryUserById" parameterType="int" resultType="user">
+		SELECT
+		<include refid="Base_sql" />
+		FROM
+		yg_customer
+		<!-- where 元素只会在至少有一个子元素的条件返回 SQL 子句的情况下才去插入“WHERE”子句。 而且，若语句的开头为“AND”或“OR”，where 
+			元素也会将它们去除。 -->
+		<where>
+			<if test="id != null">
+				and id = #{id}
+			</if>
+		</where>
+	</select>
+
+
+	<select id="queryUserByUser" parameterType="string" resultType="user">
+		SELECT
+		<include refid="Base_sql" />
+		FROM
+		yg_customer
+		
+		<!-- 等价于where的用法  -->
+		<trim prefix="where" prefixOverrides="and | or">
+			<if test="name != null and name != '' ">
+				and user_name = #{name}
+			</if>
+		</trim>
+	</select>
+	
+	
+	
+<!-- 	这里，set 元素会动态前置 SET 关键字，同时也会删掉无关的逗号，
+		因为用了条件语句之后很可能就会在生成的 SQL 语句的后面留下这些逗号。
+		（译者注：因为用的是“if”元素，若最后一个“if”没有匹配上而前面的匹配上，
+		SQL 语句的最后就会有一个逗号遗留）
+
+		若你对 set 元素等价的自定义 trim 元素的代码感兴趣，那这就是它的真面目：
+
+			<trim prefix="SET" suffixOverrides=",">
+			  ...
+			</trim>
+	 -->
+	<update id="updateUser" parameterType="user">
+		UPDATE yg_customer
+			<set>
+				<if test="userName != null and userName != ''">
+					 user_name = #{userName},
+				</if>
+				<if test="userBalance >=0 ">
+					user_balance =  #{userBalance}
+				</if>
+			</set>
+			WHERE
+				id =  #{id}
+	</update>
+
 
 </mapper>

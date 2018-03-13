@@ -3,7 +3,6 @@ package com.shsxt;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
@@ -14,7 +13,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.shsxt.dao.UserDao;
 import com.shsxt.pojo.User;
 
-public class AppTest {
+public class App {
 
 	public static void main(String[] args) throws IOException {
 
@@ -29,32 +28,15 @@ public class AppTest {
 
 		// 动态代理生成接口的实现子类
 		UserDao userDao = session.getMapper(UserDao.class);
-
-//		List<User> list = userDao.queryUserlikeUserName(null);
-//
-//		for (User user : list) {
-//			System.out.println(user);
-//		}
-		
-		
-//		User user = new User();
-//		user.setUserName("y");
-//		user.setUserBalance(30);
-//		List<User> list = userDao.queryUserByUserNameOrUserBal(user);
-//		for (User u : list) {
-//			System.out.println(u);
-//		}
-		
-//		List<User> list = userDao.queryUserById(1);
 //		
-//		for (User u : list) {
-//			System.out.println(u);
-//		}
+//		User user = userDao.queryUserByid(1);
 		
-		List<User> users = userDao.queryUserByUser("yonggan");
-		for (User user : users) {
-			System.out.println(user);
-		}
+		int delUserById = userDao.delUserById(40);
+		
+		
+		System.out.println(delUserById);
+		
+	
 	}
 
 }
