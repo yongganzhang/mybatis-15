@@ -46,6 +46,8 @@ public class App {
 		GoodsDao mapper = session.getMapper(GoodsDao.class);
 		Goods queryGoodsById = mapper.queryGoodsById(2);
 		System.out.println(queryGoodsById);
+		
+		
 	}
 
 }
